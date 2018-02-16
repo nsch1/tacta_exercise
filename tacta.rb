@@ -1,5 +1,6 @@
 require "json"
 require "./contacts_file"
+require "./contacts"
 
 def index(contacts)
 	contacts.each_with_index do |contact, index|
@@ -34,9 +35,7 @@ end
 def action_new(contacts)
 	contact = create_new
 
-  contacts << contact
-
-  write_contacts(contacts)
+  Contact.create(contact)
 
   puts
   puts "New contact created:"
@@ -46,8 +45,8 @@ def action_new(contacts)
   puts
 end
 
-def action_show(contacts, id)
-  contact = contacts[id - 1]
+def action_show(id)
+  contact = Contact.find(id)
 
   puts
   show(contact)
@@ -60,9 +59,7 @@ def action_delete(contacts)
 
 	id = response.to_i
 
-	deleted_contact = contacts.delete_at(id - 1)
-
-	write_contacts(contacts)
+	deleted_contact = Contact.destroy(id)
 
 	puts
 	puts "Contact for #{deleted_contact[:name]} deleted."
@@ -74,16 +71,14 @@ def action_search(contacts)
 	pattern = ask("Search for? ")
 	puts
 
-	contacts.each do |contact|
-		if contact[:name] =~ /\b#{pattern}/i
-			show(contact)
-			puts
-		end
-	end
+	contact = Contact.search(pattern)
+
+	show(contact)
+	puts
 end
 
 loop do
-	contacts = read_contacts
+	contacts = Contact.all
 
 	index(contacts)
 
@@ -100,6 +95,6 @@ loop do
   when "q"
   	break
   else
-  	action_show(contacts, response.to_i)
+  	action_show(response.to_i)
   end
 end
