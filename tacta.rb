@@ -47,6 +47,8 @@ def action_new(contacts)
 
   contacts << contact
 
+  write_contacts(contacts)
+
   puts
   puts "New contact created:"
   puts
@@ -71,6 +73,8 @@ def action_delete(contacts)
 
 	deleted_contact = contacts.delete_at(id - 1)
 
+	write_contacts(contacts)
+
 	puts
 	puts "Contact for #{deleted_contact[:name]} deleted."
 	puts
@@ -90,6 +94,8 @@ def action_search(contacts)
 end
 
 loop do
+	contacts = read_contacts
+
 	index(contacts)
 
 	puts
