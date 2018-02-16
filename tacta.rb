@@ -27,13 +27,35 @@ loop do
 	index(contacts)
 
 	puts
-	response = ask("Who would you like to see? ")
+	response = ask("Who would you like to see (n for new, q to quit)? ")
 
-	break if response == "q"
+	break if response.downcase == "q"
 
-	id = response.to_i
-	contact = contacts[id - 1]
-	puts
-	show(contact)
-	puts
+  if response == "n"
+    contact = {}
+
+    puts
+    puts "Enter contact info:"
+
+    contact[:name]  = ask("Name? ")
+    contact[:phone] = ask("Phone? ")
+    contact[:email] = ask("Email? ")
+
+    contacts << contact
+
+    puts
+    puts "New contact created:"
+    puts
+
+    show(contact)
+    puts
+  else
+    id = response.to_i
+
+    contact = contacts[id - 1]
+
+    puts
+    show(contact)
+    puts
+  end
 end
