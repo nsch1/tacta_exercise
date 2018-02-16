@@ -89,8 +89,6 @@ loop do
 	puts
 	response = ask("Who would you like to see (n for new, d for delete, s for search q to quit)? ")
 
-	break if response.downcase == "q"
-
 	case response.downcase
   when "n"
   	action_new(contacts)
@@ -98,6 +96,8 @@ loop do
   	action_delete(contacts)
   when "s"
   	action_search(contacts)
+  when "q"
+  	break
   else
   	action_show(contacts, response.to_i)
   end
