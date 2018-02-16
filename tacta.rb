@@ -7,5 +7,18 @@ contacts << { name: "Genghis Khan"    , phone: "+976 2 194 2222" , email: "conta
 contacts << { name: "Malcom X"        , phone: "+1 310 155 8822" , email: "x@theroost.org" }
 
 contacts.each_with_index do |contact, index|
-  puts "#{index}) #{contact[:name]}"
+  puts "#{index + 1}) #{contact[:name]}"
 end
+
+puts
+print "Who would you like to see? "
+response = gets.chomp
+
+id = response.to_i
+
+contact = contacts[id - 1]
+
+puts
+puts contact[:name].to_s
+puts "phone: #{contact[:phone]}"
+puts "email: #{contact[:email]}"
