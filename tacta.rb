@@ -3,14 +3,14 @@ require "./contacts"
 
 def index(contacts)
 	contacts.each_with_index do |contact, index|
-	  puts "#{index + 1}) #{contact[:name]}"
+	  puts "#{index + 1}) #{contact.name}"
 	end
 end
 
 def show(contact)
-	puts contact[:name].to_s
-	puts "phone: #{contact[:phone]}"
-	puts "email: #{contact[:email]}"
+	puts contact.name.to_s
+	puts "phone: #{contact.phone}"
+	puts "email: #{contact.email}"
 end
 
 def ask(prompt)
@@ -34,7 +34,7 @@ end
 def action_new(contacts)
 	contact = create_new
 
-  Contact.create(contact)
+  contact = Contact.create(contact)
 
   puts
   puts "New contact created:"
@@ -61,7 +61,7 @@ def action_delete(contacts)
 	deleted_contact = Contact.destroy(id)
 
 	puts
-	puts "Contact for #{deleted_contact[:name]} deleted."
+	puts "Contact for #{deleted_contact.name} deleted."
 	puts
 end
 
