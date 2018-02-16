@@ -70,18 +70,34 @@ def action_delete(contacts)
 	puts
 end
 
+def action_search(contacts)
+	puts
+	pattern = ask("Search for? ")
+	puts
+
+	contacts.each do |contact|
+		if contact[:name] =~ /\b#{pattern}/i
+			show(contact)
+			puts
+		end
+	end
+end
+
 loop do
 	index(contacts)
 
 	puts
-	response = ask("Who would you like to see (n for new, d for delete, q to quit)? ")
+	response = ask("Who would you like to see (n for new, d for delete, s for search q to quit)? ")
 
 	break if response.downcase == "q"
 
-  if response == "n"
+	case response.downcase
+  when "n"
   	action_new(contacts)
-  elsif response == "d"
+  when "d"
   	action_delete(contacts)
+  when "s"
+  	action_search(contacts)
   else
   	action_show(contacts, response.to_i)
   end
