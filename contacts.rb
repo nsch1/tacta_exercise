@@ -11,7 +11,7 @@ class Contact
 
   def self.all
     read_contacts.map do |contact|
-    	self.new(contact)
+    	Contact.new(contact)
     end
   end
 
@@ -28,14 +28,14 @@ class Contact
   end
 
   def self.create(new_contact)
-  	contacts = self.all << new_contact = self.new(new_contact)
+  	contacts = self.all << new_contact = Contact.new(new_contact)
   	contacts = self.save(contacts)
   	write_contacts(contacts)
   	new_contact
   end
 
   def self.update(id, contact)
-  	contacts = self.all[id -1] = self.new(contact)
+  	contacts = self.all[id -1] = Contact.new(contact)
     write_contacts(contacts)
   end
 
