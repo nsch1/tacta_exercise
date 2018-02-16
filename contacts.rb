@@ -1,6 +1,14 @@
 require "./contacts_file"
 
 class Contact
+	attr_accessor :name, :phone, :email
+
+	def initialize(name, phone, email)
+		@name = name
+		@phone = phone
+		@email = email
+	end
+
   def self.all
     read_contacts
   end

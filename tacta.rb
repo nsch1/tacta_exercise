@@ -1,5 +1,4 @@
 require "json"
-require "./contacts_file"
 require "./contacts"
 
 def index(contacts)
